@@ -14,8 +14,10 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
     mGainSlider.setSliderStyle (juce::Slider::SliderStyle::LinearVertical);
+    mGainSlider.setTextBoxStyle (juce::Slider::TextBoxBelow, true, 50, 20);
     mGainSlider.setRange (0.0f, 1.0f, 0.01f);
     mGainSlider.setValue (0.5f);
+    mGainSlider.addListener(this);
     addAndMakeVisible (mGainSlider);
     setSize (200, 300);
 }
@@ -36,3 +38,13 @@ void NewProjectAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
 }
+
+void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider *slider)
+{
+    if (slider == &mGainSlider)
+    {
+        processor.mGain = mGainSlider.getValue();
+        
+    }
+}
+

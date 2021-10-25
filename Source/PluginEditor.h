@@ -14,7 +14,8 @@
 //==============================================================================
 /**
 */
-class NewProjectAudioProcessorEditor  : public juce::AudioProcessorEditor
+class NewProjectAudioProcessorEditor  : public juce::AudioProcessorEditor,
+public juce::Slider::Listener
 {
 public:
     NewProjectAudioProcessorEditor (NewProjectAudioProcessor&);
@@ -23,7 +24,9 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-
+    void sliderValueChanged (juce::Slider* slider) override;
+    
+    
 private:
     juce::Slider mGainSlider;
     NewProjectAudioProcessor& audioProcessor;
